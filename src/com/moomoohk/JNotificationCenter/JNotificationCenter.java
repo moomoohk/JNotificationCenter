@@ -1,4 +1,4 @@
-package com.moomoohk.OSXUtils;
+package com.moomoohk.JNotificationCenter;
 
 public class JNotificationCenter
 {
