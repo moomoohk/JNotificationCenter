@@ -2,5 +2,23 @@ package com.moomoohk.JNotificationCenter;
 
 public class JNotificationCenter
 {
-	public static native void showNotification(String title, String message, String subtitle, String sender);
+	private static boolean loaded = false;
+
+	public static void load()
+	{
+		try
+		{
+			System.loadLibrary("JNotificationCenter");
+			loaded = true;
+		}
+		catch (UnsatisfiedLinkError err)
+		{
+			throw new RuntimeException(err);
+		}
+	}
+
+	public static boolean isLoaded()
+	{
+		return loaded;
+	}
 }

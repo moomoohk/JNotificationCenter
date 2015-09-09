@@ -3,7 +3,7 @@
 #import <objc/runtime.h>
 #import "JavaNativeFoundation/JavaNativeFoundation.h"
 
-#include "JNotificationCenter.h"
+#include "External Headers/SimpleNotification.h"
 
 NSString * const TerminalNotifierBundleID = @"nl.superalloy.oss.terminal-notifier";
 NSString * const NotificationCenterUIBundleID = @"com.apple.notificationcenterui";
@@ -270,19 +270,21 @@ isMavericks()
 
 @end
 
-JNIEXPORT void JNICALL Java_com_moomoohk_OSXUtils_JNotificationCenter_showNotification (JNIEnv* env, jclass jthis, jstring jTitle, jstring jMessage, jstring jSubtitle, jstring jSender) {
+JNIEXPORT void JNICALL Java_com_moomoohk_JNotificationCenter_notifications_SimpleNotification_show(JNIEnv* env, jobject jthis, jstring jtitle, jstring jmessage, jstring jsubtitle, jstring jsender, jstring jsound) {
     JNF_COCOA_ENTER(env);
     AppDelegate* appDelegate = [AppDelegate new];
-    NSString* title = JNFJavaToNSString(env, jTitle);
-    NSString* message = JNFJavaToNSString(env, jMessage);
-    NSString* sender = JNFJavaToNSString(env, jSender);
-    NSString* subtitle = JNFJavaToNSString(env, jSubtitle);
+    NSString* title = JNFJavaToNSString(env, jtitle);
+    NSString* message = JNFJavaToNSString(env, jmessage);
+    NSString* subtitle = JNFJavaToNSString(env, jsubtitle);
+    NSString* sender = JNFJavaToNSString(env, jsender);
+    NSString* sound = JNFJavaToNSString(env, jsound);
+    
+    printf("%s\n", [sound UTF8String]);
     
     [appDelegate deliverNotificationWithTitle:title
                                      subtitle:subtitle
                                       message:message
                                       options:@{@"sender": sender}
-                                        sound:NSUserNotificationDefaultSoundName];
+                                        sound:sound];
     JNF_COCOA_EXIT(env);
-    return;
 }

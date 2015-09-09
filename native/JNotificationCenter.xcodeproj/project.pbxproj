@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A04AF231B9E1CE900DCF4B6 /* AppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A04AF211B9E1CE900DCF4B6 /* AppDelegate.h */; };
 		4A04AF241B9E1CE900DCF4B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04AF221B9E1CE900DCF4B6 /* AppDelegate.m */; };
-		4A31A5A71B9E26D100BA1E72 /* JNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A31A5A61B9E26D100BA1E72 /* JNotificationCenter.h */; };
+		4A33858F1BA0CBBE00E53855 /* SimpleNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A33858E1BA0CBBE00E53855 /* SimpleNotification.h */; };
 		4A65A3201B9DFE1400A37FD4 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5199794115B2F908003AFC57 /* ScriptingBridge.framework */; };
 		4A65A3211B9DFE1800A37FD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5199791815B1F92B003AFC57 /* Cocoa.framework */; };
 		4A65A3221B9DFE2B00A37FD4 /* JavaNativeFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A65A3011B9DFCD700A37FD4 /* JavaNativeFoundation.framework */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		4A04AF211B9E1CE900DCF4B6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = JNotificationCenter/AppDelegate.h; sourceTree = "<group>"; };
 		4A04AF221B9E1CE900DCF4B6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = JNotificationCenter/AppDelegate.m; sourceTree = "<group>"; };
-		4A31A5A61B9E26D100BA1E72 /* JNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNotificationCenter.h; sourceTree = "<group>"; };
+		4A33858E1BA0CBBE00E53855 /* SimpleNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleNotification.h; sourceTree = "<group>"; };
 		4A65A2FF1B9DFC9A00A37FD4 /* JavaVM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaVM.framework; path = System/Library/Frameworks/JavaVM.framework; sourceTree = SDKROOT; };
 		4A65A3011B9DFCD700A37FD4 /* JavaNativeFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaNativeFoundation.framework; path = ../../../../../../System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework; sourceTree = "<group>"; };
 		4A65A3071B9DFD7100A37FD4 /* libJNotificationCenter.jnilib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libJNotificationCenter.jnilib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,16 +46,25 @@
 		4A04AF201B9E1CD600DCF4B6 /* JNotificationCenter */ = {
 			isa = PBXGroup;
 			children = (
+				4A33858D1BA0C20F00E53855 /* External Headers */,
 				4A04AF211B9E1CE900DCF4B6 /* AppDelegate.h */,
 				4A04AF221B9E1CE900DCF4B6 /* AppDelegate.m */,
 			);
 			name = JNotificationCenter;
 			sourceTree = "<group>";
 		};
+		4A33858D1BA0C20F00E53855 /* External Headers */ = {
+			isa = PBXGroup;
+			children = (
+				4A33858E1BA0CBBE00E53855 /* SimpleNotification.h */,
+			);
+			name = "External Headers";
+			path = "JNotificationCenter/External Headers";
+			sourceTree = "<group>";
+		};
 		5199790915B1F92B003AFC57 = {
 			isa = PBXGroup;
 			children = (
-				4A31A5A61B9E26D100BA1E72 /* JNotificationCenter.h */,
 				4A04AF201B9E1CD600DCF4B6 /* JNotificationCenter */,
 				5199794115B2F908003AFC57 /* ScriptingBridge.framework */,
 				5199791715B1F92B003AFC57 /* Frameworks */,
@@ -100,7 +109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A04AF231B9E1CE900DCF4B6 /* AppDelegate.h in Headers */,
-				4A31A5A71B9E26D100BA1E72 /* JNotificationCenter.h in Headers */,
+				4A33858F1BA0CBBE00E53855 /* SimpleNotification.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
