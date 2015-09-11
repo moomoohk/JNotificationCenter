@@ -1,6 +1,6 @@
 # Makefile
 
-native_files = SimpleNotification
+native_files = SimpleNotification URLNotification
 output_dir = ./native/JNotificationCenter/External\ Headers/
 
 .PHONY: headers lib

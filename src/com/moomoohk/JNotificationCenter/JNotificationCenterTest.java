@@ -1,6 +1,6 @@
 package com.moomoohk.JNotificationCenter;
 
-import com.moomoohk.JNotificationCenter.notifications.SimpleNotification;
+import com.moomoohk.JNotificationCenter.notifications.URLNotification;
 
 public class JNotificationCenterTest
 {
@@ -11,9 +11,10 @@ public class JNotificationCenterTest
 		String title = "title";
 		String message = "message";
 		String subtitle = "subtitle";
-		String sender = "com.apple.safari";
+		String sender = "com.google.chrome";
 		OSXSoundEffect sound = OSXSoundEffect.FUNK;
-		SimpleNotification n = new SimpleNotification(title, message, subtitle, sender, sound);
+		String url = "http://google.com";
+		URLNotification n = new URLNotification(title, message, subtitle, sender, sound, url);
 		n.show();
 	}
 }

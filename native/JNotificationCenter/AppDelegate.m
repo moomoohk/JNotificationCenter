@@ -4,6 +4,7 @@
 #import "JavaNativeFoundation/JavaNativeFoundation.h"
 
 #include "External Headers/SimpleNotification.h"
+#include "External Headers/URLNotification.h"
 
 NSString * const TerminalNotifierBundleID = @"nl.superalloy.oss.terminal-notifier";
 NSString * const NotificationCenterUIBundleID = @"com.apple.notificationcenterui";
@@ -195,6 +196,7 @@ isMavericks()
 
 - (void)userActivatedNotification:(NSUserNotification *)userNotification;
 {
+    printf("activated\n");
   [[NSUserNotificationCenter defaultUserNotificationCenter] removeDeliveredNotification:userNotification];
 
   NSString *groupID  = userNotification.userInfo[@"groupID"];
@@ -211,11 +213,15 @@ isMavericks()
   NSLog(@"  command: %@", command);
   NSLog(@"     open: %@", open);
 
+    printf("url %s\n", [[[NSURL URLWithString:open] fragment] UTF8String]);
+    
   BOOL success = YES;
   if (bundleID) success &= [self activateAppWithBundleID:bundleID];
   if (command)  success &= [self executeShellCommand:command];
   if (open)     success &= [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:open]];
 
+    printf("%d", success);
+    
   exit(success ? 0 : 1);
 }
 
@@ -279,12 +285,38 @@ JNIEXPORT void JNICALL Java_com_moomoohk_JNotificationCenter_notifications_Simpl
     NSString* sender = JNFJavaToNSString(env, jsender);
     NSString* sound = JNFJavaToNSString(env, jsound);
     
-    printf("%s\n", [sound UTF8String]);
-    
     [appDelegate deliverNotificationWithTitle:title
                                      subtitle:subtitle
                                       message:message
                                       options:@{@"sender": sender}
                                         sound:sound];
     JNF_COCOA_EXIT(env);
+}
+
+JNIEXPORT void JNICALL Java_com_moomoohk_JNotificationCenter_notifications_URLNotification_show(JNIEnv* env, jobject jthis, jstring jtitle, jstring jmessage, jstring jsubtitle, jstring jsender, jstring jsound, jstring jurl) {
+    JNF_COCOA_ENTER(env);
+    AppDelegate* appDelegate = [AppDelegate new];
+    NSString* title = JNFJavaToNSString(env, jtitle);
+    NSString* message = JNFJavaToNSString(env, jmessage);
+    NSString* subtitle = JNFJavaToNSString(env, jsubtitle);
+    NSString* sender = JNFJavaToNSString(env, jsender);
+    NSString* sound = JNFJavaToNSString(env, jsound);
+    NSString* url = JNFJavaToNSString(env, jurl);
+    
+    NSString *encodedURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *urlObj = [NSURL URLWithString:url];
+    NSString *fragment = [urlObj fragment];
+    
+    NSString* openParam = fragment ? [appDelegate decodeFragmentInURL:encodedURL fragment:fragment] : encodedURL;
+    
+    [appDelegate deliverNotificationWithTitle:title
+                                     subtitle:subtitle
+                                      message:message
+                                      options:@{
+                                                @"sender": sender,
+                                                @"open": openParam
+                                                }
+                                        sound:sound];
+    JNF_COCOA_EXIT(env);
+    printf("Done\n");
 }
